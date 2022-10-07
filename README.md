@@ -2,7 +2,6 @@
 Google IT Automation with Python Professional Certificate project 1
 project goal:
 Use the Python Imaging Library to do the following to a batch of images:
-1. open an image
-2. rotate an image
-3. resize an image
-4. save an image in a specific format in a separate directory
+1. Rotate the image 90° clockwise
+2. Resize the image from 192x192 to 128x128
+3. Save the image to a new folder in .jpeg format
