@@ -1,16 +1,21 @@
+#!/usr/bin/env python3
+
 from PIL import Image
 import os
-import sys
+import re
 
 def get_files_in_dir(dir_path):
     items_list = os.listdir(dir_path)
     item =""
     image_list = []
     for item in items_list:
+        # check file is image (temporary solution)
         if os.path.isfile(os.path.join(dir_path, item)):
-            image_list.append(item)
-    
-    print(image_list)
+            # target file dosen't have extension
+            if re.search("ic_", os.path.join(dir_path, item)) != None:
+                image_list.append(item)
+
+    # check list content print(image_list)
     return image_list
 
 
@@ -25,18 +30,19 @@ def resize_an_image_128x128(im_class):
 
 
 def main():
-    try_times = 0
-    while try_times < 5 :
-        source_path = input("please enter the source path: ")
-        dest_path = input("please enter the destination path: ")
-    # valid dir_path
-        if os.path.isdir(source_path):
+    # input directory path 
+    while True:
+        source_path = os.path.abspath(input("please enter the source path: "))
+        dest_path = os.path.abspath(input("please enter the destination path: "))
+        # valid path
+        # check path content print(source_path, dest_path)
+        if os.path.isdir(source_path) and os.path.isdir(source_path) :
             print("directory valid")
             break
         else:
             print("directory invalid")
-        try_times += 1
-    
+
+
     images_list = get_files_in_dir(source_path)
 
     print("applying transform (roate270, resize128x128, JEPG) and save to the destination")
@@ -45,7 +51,8 @@ def main():
         with Image.open(os.path.join(source_path, image)) as im_class:
             im_class_rotated = rotate_an_image_270(im_class)
             im_class_fin = resize_an_image_128x128(im_class_rotated)
-            im_class_fin.save( os.path.join(dest_path, image))
+            # target file dosen't have extension
+            im_class_fin.convert('RGB').save( os.path.join(dest_path, image), "JPEG" )
 
     print("action complete")
 
