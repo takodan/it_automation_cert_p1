@@ -1,5 +1,6 @@
 # it_automation_cert_p1
 Google IT Automation with Python Professional Certificate project 1
+
 project goal:
 Use the Python Imaging Library to do the following to a batch of images:
 1. Rotate the image 90° clockwise
